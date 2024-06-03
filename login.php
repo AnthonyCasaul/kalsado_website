@@ -1,3 +1,49 @@
+<?php
+ob_start();
+session_start();
+include 'db_connect.php';
+
+if(isset($_POST['submit'])){
+
+   $email = mysqli_real_escape_string($conn, $_POST['username']);
+   $pass = mysqli_real_escape_string($conn, $_POST['password']);
+
+   $select = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+   
+
+   if(mysqli_num_rows($select) > 0){
+      $row = mysqli_fetch_assoc($select);
+      $type = $row['type'];  
+
+
+               if($type == 1){
+                  $_SESSION['user_id'] = $row['id'];
+                  $_SESSION['email'] = $row['email'];
+                  $_SESSION['type'] = $row['type'];
+                  header('location:dashboard.php');
+                }
+
+                else if ($type == 2){
+                  $_SESSION['user_id'] = $row['id'];
+                  $_SESSION['email'] = $row['email'];
+                  $_SESSION['type'] = $row['type'];
+                  header('location:home.php');
+                }
+
+                else{
+                  $_SESSION['user_id'] = $row['id'];
+                  $_SESSION['email'] = $row['email'];
+                  $_SESSION['type'] = $row['type'];
+                  header('location: user/index.php');
+                }
+    }
+
+    else{
+        echo '<script> alert("Invalid Account!");</script>';
+     }
+}
+
+?>
 <head>
 <style>
 body {   
@@ -13,7 +59,7 @@ body {
       width: 30% !important;
       background-color: #fff;
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 20px;
       box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
       transition: 1.12s ease-out;
     }
@@ -92,7 +138,7 @@ body {
             </div>
             <div class="button-container" style="text-align: center;">
                 <button type="submit" name="submit">Login</button>
-                <a href="register.php" type="button" name="register">
+                <a href="registration.php" type="button" name="register">
                 <label class="registration-label">Register an Account</label>
                 </a>
             </div>
