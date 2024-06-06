@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+$loggedIn = isset($_SESSION['user_id']) === true;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +33,14 @@
                 <a href="" class="nav_link" title="Collection">Collection</a>
                 <a href="" class="nav_link" title="About">About</a>
                 <a href="" class="nav_link_1" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
-                <a href="login.php" class="nav_link" title="Login">Login</a>
-                <form method="post" action="">
-                    <input type="hidden" name="logout" value="true" />
-                    <button type="submit">Logout</button>
-                </form>
+                <?php if (!$loggedIn): ?>
+                    <a href="login.php" class="nav_link" title="Login">Login</a>
+                <?php else: ?>
+                    <form method="post" action="" style="display:inline;">
+                        <input type="hidden" name="logout" value="true">
+                        <button type="submit" class="btn btn-link nav_link" style="display:inline; padding: 0; margin: 0;" title="Logout">Logout</button>
+                    </form>
+                <?php endif; ?>
             </div>
         </div>
     </div>

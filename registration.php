@@ -7,16 +7,21 @@ if(isset($_POST['submit'])){
    $firstName = mysqli_real_escape_string($conn, $_POST['first_name']);
    $lastName = mysqli_real_escape_string($conn, $_POST['last_name']);
    $username = mysqli_real_escape_string($conn, $_POST['username']);
+   $address = mysqli_real_escape_string($conn, $_POST['address']);
+   $birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
+   $contactNumber = mysqli_real_escape_string($conn, $_POST['contactNumber']);
+   $socials = mysqli_real_escape_string($conn, $_POST['socials']);
+   $gender = mysqli_real_escape_string($conn, $_POST['gender']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = mysqli_real_escape_string($conn, $_POST['password']);
+   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
 
-   $select = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email'") or die('query failed');
+   $select = mysqli_query($conn, "SELECT * FROM `profile` WHERE Email = '$email'") or die('query failed');
     
-
+  $fullName = $firstName." ".$lastName;
    if(mysqli_num_rows($select) == 0){  
 
-     $insert = mysqli_query($conn, "INSERT INTO `users`(first_name, last_name, username, email, password, type)VALUES('$firstName', '$lastName', '$username', '$email', '$pass', 3)") or die('query failed');
-      header('location:index.php');
+     $insert = mysqli_query($conn, "INSERT INTO `profile`(Username, Email, Address, Fullname, PhoneNumber, Password, DoB, Gender, Socials)VALUES('$username', '$email', '$address', '$fullName', '$contactNumber', '$pass', '$birthdate', '$gender', '$socials')") or die('query failed');
+      header('location:login.php');
 
     }
 
@@ -129,6 +134,37 @@ if(isset($_POST['submit'])){
     <div class="form-floating text">
       <input type="text" class="form-control" id="floatingInput" name="username" placeholder="" required/>
       <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating text">
+      <input type="text" class="form-control" id="floatingInput" name="address" placeholder="" required/>
+      <label for="floatingInput">Full Address</label>
+    </div>
+    <div class="form-floating text">
+      <input type="date" name="birthdate" id="birthdate" class="form-control" required placeholder=" "/>
+      <label for="contact-number">BirthDate</label>
+    </div>
+    <div class="form-floating text">
+      <input type="number" class="form-control" id="floatingInput" name="contactNumber" placeholder="" required maxlength="11">
+      <label for="floatingInput">Contact Number</label>
+    </div>
+    <div class="form-floating text">
+      <input type="text" class="form-control" id="floatingInput" name="socials" placeholder="" required/>
+      <label for="floatingInput">Socials</label>
+    </div>
+    <div class="d-flex flex-row gap-5 align-items-left my-4">
+      <label for="role ">Gender:</label>
+      <div class="form-check mr-2 mb-0">
+              <input class="form-check-input" type="radio" name="gender" id="staff" value="male">
+              <label class="form-check-label" for="staff">
+                  Male
+              </label>
+      </div>
+      <div class="form-check mb-0">
+              <input class="form-check-input" type="radio" name="gender" id="manager" value="female">
+              <label class="form-check-label" for="manager">
+                  Female
+              </label>
+      </div>
     </div>
     <div class="form-floating email">
       <input type="text" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required/>
