@@ -30,13 +30,11 @@ if (isset($_POST['logout'])) {
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 </head>
 
 <body id="page-top" style="background-image: url('../images/Kalsado.png'); background-size: cover;">
-
-<body id="page-top">
-
 
 <div id="wrapper">
 
@@ -80,16 +78,37 @@ if (isset($_POST['logout'])) {
         <hr class="sidebar-divider">
 
         <div class="sidebar-heading">
-            Accounts
+            Brands
         </div>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Accounts</span>
+                <span>Brands</span>
             </a>
             <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Brand Manager:</h6>
+                    <a class="collapse-item" href="add_brand.php">Add Brand</a>
+                    <a class="collapse-item" href="manage_brand.php">Manage Brands</a>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Accounts
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Accounts</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Account Manager:</h6>
                     <a class="collapse-item" href="manage_account.php">Manage Accounts</a>

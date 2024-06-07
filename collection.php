@@ -16,6 +16,8 @@ include './inc/header.php';
     border: 1px solid #ddd;
     margin: 20px 0px;
     text-align: center;
+    height: auto;
+    background-color: #fff !important;
 }
 
 .productImage {
@@ -31,7 +33,7 @@ include './inc/header.php';
 .text{
     padding-top: 20px !important;
     width: 100%;
-    height: 20%;
+    height: auto;
     /* border: 1px solid red; */
 }
 /* .cart-box{
@@ -51,82 +53,71 @@ include './inc/header.php';
     border-color: #e83e8c !important; /* Pink color on hover */
 }
 </style>
-<div class="wrapper" id="productContainer"> 
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>   
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
-<div onclick="showProductModal('id')" class="grid-item">
-    <img class="productImage" src="./assets/images/image1.jpg" alt=""/>
-    <div class="text">
-        <h5>name</h5>
-        <p>price</p>
-    </div>
-</div>  
+<body onload="getCategory('all'); getAllCategories();">
+<div class="container-fluid">
+    <div class="flex gap-4" id="buttonContainer"></div>
+    <div class="wrapper" id="productContainer">
+        
+    </div> 
 </div>
+</body>  
+<script>
+    function viewProduct(id){
+        console.log(id);
+    }
+     function getCategory(id){
+        var productContainer = document.getElementById('productContainer');
+
+		    $.ajax({
+            type: "GET",
+            url:"filter.php",
+            data: {"id": id},
+            success: function(resp){
+            var response = JSON.parse(resp);
+ 
+            var finalContainer = '';
+            Object.keys(response).forEach(function(key) {
+
+
+                var id = response[key]['id'];
+                var name = response[key]['name'];
+                var price = response[key]['price'].toLocaleString(undefined, {style: "currency", currency: "PHP"});
+                var image = response[key]['picture'];
+                var brand = response[key]['brand'];
+                var category = response[key]['category'];
+
+                var itemContainer = '<div onclick="viewProduct('+id+')" class="grid-item"><img class="productImage" src="assets/uploaded_image/'+image+'" alt=""/><div class="text"><h5>'+name+'</h5><h5>'+brand+'</h5><h5>'+category+'</h5><p>'+price+'</p></div></div>';
+
+                finalContainer += itemContainer;
+            });
+            productContainer.innerHTML = finalContainer; 
+            }
+        });
+            }
+    function getAllCategories(){
+        var buttonContainer = document.getElementById('buttonContainer');
+
+		    $.ajax({
+            type: "GET",
+            url:"getBrand.php",
+            success: function(resp){
+
+            var response = JSON.parse(resp);
+
+            var finalButtonContainer = '';
+                finalButtonContainer += '<button class="btn btn-outline-danger" onclick="getCategory(\'all\')">ALL</button>';
+            Object.keys(response).forEach(function(key) {
+
+
+                var id = response[key]['id'];
+                var name = response[key]['name'];
+
+                var itemContainer = '<button class="btn btn-outline-alert" onclick="getCategory('+id+')" style="margin-right: 5px;">'+name+'</button>';
+
+                finalButtonContainer += itemContainer;
+            });
+            buttonContainer.innerHTML = finalButtonContainer; 
+    }
+});
+    }
+</script>
