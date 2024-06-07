@@ -1,17 +1,24 @@
 <?php
 include './inc/header.php';
+include 'db_connect.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     
-    $qry = $conn->query("SELECT * FROM products WHERE id = $id ");
+    $qry = $conn->query("SELECT p.*, b.name AS brand_name, b.icon_image
+                         FROM products p
+                         LEFT JOIN brand b ON p.brand = b.id
+                         WHERE p.id = $id;");
+
     $row = $qry->fetch_assoc();
         $id = $row['id'];
         $name = $row['name'];
         $price = $row['price'];
-        $brand = $row['brand'];
+        $brand = $row['brand_name'];
         $category = $row['category'];
         $picture = $row['product_image'];
+        $icon = $row['icon_image'];
+        $description = $row['description'];
 } else {
     echo "<script>alert(No ID parameter provided in the URL)</script>";
 }
@@ -90,16 +97,16 @@ if (isset($_GET['id'])) {
         <center>
             <section class="product">
             <div class="product-image">
-                <img src="./assets/images/Icon/Reebok-icon.png" class="icon" alt="Asics Logo">
-                <img src="./assets/images/ReebokShoes/ClubCVintage.png" alt="Shoe Picture" style="width: 70%;height: auto;">
+                <img src="assets/uploaded_icon/<?php echo $icon ?>" class="icon" alt="Asics Logo">
+                <img src="assets/uploaded_image/<?php echo $picture ?>" alt="Shoe Picture" style="width: 70%;height: auto;">
                 <center><p class="description" style="width: 70%;">
-                  Created for the hardwood but taken to the streets, this '80s basketball icon returns with varsity-inspired overlays and original flair. With its classic design, the Nike Dunk channels vintage style, while its padded, low-cut collar lets you take your game anywhere.
+                <?php echo $description ?>
                     </p>
                 </center>
             </div>
             <div class="product-details">
-                <h1>REEBOK "CLUB C 85 VINTAGE"</h1>
-                    <p class="price">₱5,000</p>
+                <h1><?php echo $brand." "?>"<?php echo $name ?>"</h1>
+                    <p class="price">₱<?php echo $price ?></p>
                         <div class="sizes">
                             <p>Select Size</p>
                                 <div class="size-buttons">
