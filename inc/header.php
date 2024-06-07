@@ -22,7 +22,7 @@ $loggedIn = isset($_SESSION['user_id']) === true;
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <nav>
-        <div class="container">
+        <div class="container mt-4">
             <div class="navbar">
                 <div class="nav1">
                     <img src="./assets/images/kalsado-icon.png" alt="Logo of Kalsado" width="80" height="80" title="Kalsado">
@@ -32,7 +32,7 @@ $loggedIn = isset($_SESSION['user_id']) === true;
                     <a href="index.php" class="nav_link" title="Home">Home</a>
                     <a href="collection.php" class="nav_link" title="Collection">Collection</a>
                     <a href="" class="nav_link" title="About">About</a>
-                    <a href="" class="nav_link" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
+                    <a href="cart.php" class="nav_link" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
                     <?php if (!$loggedIn): ?>
                         <a href="login.php" class="nav_link" title="Login">Login</a>
                     <?php else: ?>

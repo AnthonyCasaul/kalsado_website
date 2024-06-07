@@ -102,7 +102,7 @@ if(isset($_POST['submit'])){
                                 <div class="container-fluid justify-content-center">
                                     <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; max-height: 150px; margin-top: 10px;">
                                 </div>
-                                </a>
+                            </a>
                         </div>
                     </div>
                 </div>
