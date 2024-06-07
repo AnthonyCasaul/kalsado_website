@@ -21,27 +21,25 @@ $loggedIn = isset($_SESSION['user_id']) === true;
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <nav>
-    <div class="container">
-        <div class="navbar">
-            <div class="nav1">
-                <img src="./assets/images/kalsado-icon.png" alt="Logo of Kalsado" width="80" height="80" title="Kalsado">
-                <span title="Kalsado" style="font-size: 200%; font-style: italic;">KALSADO</span>
-                <input type="text" class="search_input" placeholder="Search...">
-            </div>
-            <div class="nav2">
-                <a href="" class="nav_link" title="Home">Home</a>
-                <a href="" class="nav_link" title="Collection">Collection</a>
-                <a href="" class="nav_link" title="About">About</a>
-                <a href="" class="nav_link_1" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
-                <?php if (!$loggedIn): ?>
-                    <a href="login.php" class="nav_link" title="Login">Login</a>
-                <?php else: ?>
-                    <form method="post" action="" style="display:inline;">
-                        <input type="hidden" name="logout" value="true">
-                        <button type="submit" class="btn btn-link nav_link" style="display:inline; padding: 0; margin: 0;" title="Logout">Logout</button>
-                    </form>
-                <?php endif; ?>
+        <div class="container">
+            <div class="navbar">
+                <div class="nav1">
+                    <img src="./assets/images/kalsado-icon.png" alt="Logo of Kalsado" width="80" height="80" title="Kalsado">
+                    <span class="logo-text" title="Kalsado">KALSADO</span>
+                    <input type="text" class="search_input" placeholder="Search...">
+
+                    <a href="index.php" class="nav_link" title="Home">Home</a>
+                    <a href="collection.php" class="nav_link" title="Collection">Collection</a>
+                    <a href="" class="nav_link" title="About">About</a>
+                    <a href="" class="nav_link" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
+                    <?php if (!$loggedIn): ?>
+                        <a href="login.php" class="nav_link" title="Login">Login</a>
+                    <?php else: ?>
+                        <form method="post" action="" class="logout_form">
+                            <input type="hidden" name="logout" value="true">
+                            <button type="submit" class="nav_link logout_btn" title="Logout">Logout</button>
+                        </form>
+                    <?php endif; ?>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>

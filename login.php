@@ -12,12 +12,19 @@ if(isset($_POST['submit'])){
    
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
-           
-      $_SESSION['user_id'] = $row['UserID'];
-      $_SESSION['email'] = $row['Email'];
-      $_SESSION['username'] = $row['Username'];
-      header('location:index.php');
-   
+      $role = $row['role'];
+
+      if($role == 1){
+        $_SESSION['user_id'] = $row['UserID'];
+        $_SESSION['email'] = $row['Email'];
+        $_SESSION['username'] = $row['Username'];
+         header('location:./admin/dashboard.php');
+      }else{  
+        $_SESSION['user_id'] = $row['UserID'];
+        $_SESSION['email'] = $row['Email'];
+        $_SESSION['username'] = $row['Username'];
+        header('location:index.php');
+      }
     }
 
     else{
