@@ -27,44 +27,43 @@ include './inc/header.php';
 }
 
 .grid-item:hover{
-    transform: scale(1.15); /* Adjust the scale factor as needed */
-    transition: transform 0.5s ease; /* Add a smooth transition effect */
+    transform: scale(1.15); 
+    transition: transform 0.5s ease; 
   }
 .text{
     padding-top: 20px !important;
     width: 100%;
     height: auto;
-    /* border: 1px solid red; */
+
 }
-/* .cart-box{
-    background-color: aqua;
-} */
+
 .cart-box tr:nth-child(2){
-    /* background-color: red; */
+
     height: 40px;
 }
 .btn-outline-danger {
-    color: #e83e8c !important; /* Pink color */
-    border-color: #e83e8c !important; /* Pink color */
+    color: #e83e8c !important;
+    border-color: #e83e8c !important; 
 }
 .btn-outline-danger:hover {
-    color: #fff !important; /* White color on hover */
-    background-color: #e83e8c !important; /* Pink color on hover */
-    border-color: #e83e8c !important; /* Pink color on hover */
+    color: #fff !important; 
+    background-color: #e83e8c !important;
+    border-color: #e83e8c !important;
 }
 </style>
 <body onload="getCategory('all'); getAllCategories();">
 <div class="container-fluid">
     <div class="flex gap-4" id="buttonContainer"></div>
     <div class="wrapper" id="productContainer">
-        
-    </div> 
+ </div> 
 </div>
 </body>  
 <script>
+
     function viewProduct(id){
-        console.log(id);
+        window.location.href = "view_product.php?id=" + id;
     }
+
      function getCategory(id){
         var productContainer = document.getElementById('productContainer');
 
@@ -102,22 +101,22 @@ include './inc/header.php';
             url:"getBrand.php",
             success: function(resp){
 
-            var response = JSON.parse(resp);
+                var response = JSON.parse(resp);
 
-            var finalButtonContainer = '';
-                finalButtonContainer += '<button class="btn btn-outline-danger" onclick="getCategory(\'all\')">ALL</button>';
-            Object.keys(response).forEach(function(key) {
+                var finalButtonContainer = '';
+                    finalButtonContainer += '<button class="btn btn-outline-danger" onclick="getCategory(\'all\')">ALL</button>';
+                Object.keys(response).forEach(function(key) {
 
 
-                var id = response[key]['id'];
-                var name = response[key]['name'];
+                    var id = response[key]['id'];
+                    var name = response[key]['name'];
 
-                var itemContainer = '<button class="btn btn-outline-alert" onclick="getCategory('+id+')" style="margin-right: 5px;">'+name+'</button>';
+                    var itemContainer = '<button class="btn btn-outline-alert" onclick="getCategory('+id+')" style="margin-right: 5px;">'+name+'</button>';
 
-                finalButtonContainer += itemContainer;
-            });
-            buttonContainer.innerHTML = finalButtonContainer; 
-    }
-});
-    }
+                    finalButtonContainer += itemContainer;
+                    });
+                buttonContainer.innerHTML = finalButtonContainer; 
+            }
+        });
+     }
 </script>

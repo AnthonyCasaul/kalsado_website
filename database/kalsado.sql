@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2024 at 07:52 PM
+-- Generation Time: Jun 07, 2024 at 09:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,18 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `brand` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `icon_image` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `brand`
 --
 
-INSERT INTO `brand` (`id`, `name`) VALUES
-(1, 'Nike'),
-(2, 'Puma'),
-(3, 'Adidas'),
-(4, 'Jordan');
+INSERT INTO `brand` (`id`, `name`, `icon_image`) VALUES
+(1, 'Nike', ''),
+(2, 'Puma', ''),
+(3, 'Adidas', ''),
+(4, 'Jordan', ''),
+(5, 'Bread Pan', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg');
 
 -- --------------------------------------------------------
 
@@ -240,7 +242,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
