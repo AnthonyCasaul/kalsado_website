@@ -22,6 +22,14 @@ if (isset($_GET['id'])) {
 } else {
     echo "<script>alert(No ID parameter provided in the URL)</script>";
 }
+
+if (isset($_POST['addToCart'])) {
+    if (isset($_SESSION['user_id']) === true){
+        echo "successs";
+    }else {
+        echo "<script>window.location.href='login.php';</script>";
+    }
+}
 ?>
 <style>
     main {
@@ -97,7 +105,7 @@ if (isset($_GET['id'])) {
         <center>
             <section class="product">
             <div class="product-image">
-                <img src="assets/uploaded_icon/<?php echo $icon ?>" class="icon" alt="Asics Logo">
+                <img src="assets/uploaded_icon/<?php ?>" class="icon" alt="Asics Logo">
                 <img src="assets/uploaded_image/<?php echo $picture ?>" alt="Shoe Picture" style="width: 70%;height: auto;">
                 <center><p class="description" style="width: 70%;">
                 <?php echo $description ?>
@@ -124,7 +132,9 @@ if (isset($_GET['id'])) {
                                     <button>15 US</button>
                                 </div>
                         </div>
-                     <button class="cart-button">I WANT THIS</button>
+                    <form method="post" action="">
+                     <button type="submit" name="addToCart" class="cart-button">I WANT THIS</button>
+                    </form>
                 </div>
             </section>
         </center>

@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: index.php");
     exit();
 }
 
