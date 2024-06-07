@@ -6,7 +6,7 @@ include './inc/header.php';
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     margin: 40px;
-    justify-content: center;
+    
 }
 
 .grid-item {
@@ -55,7 +55,7 @@ include './inc/header.php';
 </style>
 <body onload="getCategory('all'); getAllCategories();">
 <div class="container-fluid">
-    <div class="flex gap-4" id="buttonContainer"></div>
+    <div class="flex gap-4" id="buttonContainer"></div> <!-- gawan daw ng ccs lathrell -->
     <div class="wrapper" id="productContainer">
         
     </div> 
