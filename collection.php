@@ -53,7 +53,7 @@ include './inc/header.php';
 </style>
 <body onload="getCategory('all'); getAllCategories();">
 <div class="container-fluid">
-    <div class="flex gap-4" id="buttonContainer"></div> <!-- gawan daw ng ccs lathrell -->
+    <div class="flex gap-4" id="buttonContainer" style="color:red;"></div> <!-- gawan daw ng ccs lathrell -->
     <div class="wrapper" id="productContainer">
  </div> 
 </div>

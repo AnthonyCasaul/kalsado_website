@@ -4,6 +4,8 @@ body {
   padding: 0;
   background-image: url("../images/Kalsado.png");
   background-size: cover;
+  
+
 }
 .container {
   font-family: "Rowdies", sans-serif;
@@ -104,3 +106,4 @@ body {
 .footer::after {
   right: 0;
 }
+

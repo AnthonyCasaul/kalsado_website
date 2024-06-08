@@ -37,8 +37,18 @@ $loggedIn = isset($_SESSION['user_id']) === true;
                         <a href="login.php" class="nav_link" title="Login">Login</a>
                     <?php else: ?>
                         <form method="post" action="" class="logout_form">
-                            <input type="hidden" name="logout" value="true">
-                            <button type="submit" class="nav_link logout_btn" title="Logout">Logout</button>
+                            <input type="hidden" name="logout" value="true" >
+                            <button type="submit" class="nav_link logout_btn" style="{text-decoration: none;
+                                                                                    color: white;
+                                                                                    margin-left: 20px;
+                                                                                    padding: 3px 10px;
+                                                                                    border-radius: 10px;
+                                                                                    }
+                                                                                    
+                                                                                    :hover{background-color: white;
+                                                                                        color: #f1d0b4;
+                                                                                        border-radius: 10px;
+                                                                                        transition: ease-in 0.3s;}"title="Logout">Logout</button>
                         </form>
                     <?php endif; ?>
             </div>
