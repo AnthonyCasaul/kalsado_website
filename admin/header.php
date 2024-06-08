@@ -38,8 +38,7 @@ if (isset($_POST['logout'])) {
 
 <div id="wrapper">
 
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #FAC4AD;">
-
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #f6c23e;"> <!-- palitan rgb -->
         <div class="sidebar-brand d-flex align-items-center justify-content-center mt-4">
             <div class="sidebar-brand-icon">
                 <img src="../assets/images/kalsado-icon.png" alt="Logo of Kalsado" width="50" height="50" title="Kalsado">
