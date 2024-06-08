@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2024 at 09:20 PM
+-- Generation Time: Jun 08, 2024 at 07:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,10 +38,10 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`id`, `name`, `icon_image`) VALUES
-(1, 'Nike', ''),
-(2, 'Puma', ''),
-(3, 'Adidas', ''),
-(4, 'Jordan', ''),
+(1, 'Nike', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg'),
+(2, 'Puma', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg'),
+(3, 'Adidas', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg'),
+(4, 'Jordan', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg'),
 (5, 'Bread Pan', '8dbdb3cc40607f5be46eba9ebcfc9041.jpg');
 
 -- --------------------------------------------------------
@@ -51,21 +51,12 @@ INSERT INTO `brand` (`id`, `name`, `icon_image`) VALUES
 --
 
 CREATE TABLE `cart` (
-  `CartID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL COMMENT 'fk_UserID',
-  `ProductID` int(11) NOT NULL COMMENT 'fk_ProductID',
-  `Size` int(11) NOT NULL,
-  `TotalPrice` decimal(10,2) NOT NULL
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT 'fk_UserID',
+  `product_id` int(11) NOT NULL COMMENT 'fk_ProductID',
+  `size` varchar(11) NOT NULL,
+  `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`CartID`, `UserID`, `ProductID`, `Size`, `TotalPrice`) VALUES
-(1, 2, 1, 12, 0.00),
-(2, 2, 1, 8, 0.00),
-(3, 2, 1, 11, 0.00);
 
 -- --------------------------------------------------------
 
@@ -74,11 +65,11 @@ INSERT INTO `cart` (`CartID`, `UserID`, `ProductID`, `Size`, `TotalPrice`) VALUE
 --
 
 CREATE TABLE `orders` (
-  `OrderID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL COMMENT 'fk_UserID',
-  `OrderDate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `OrderStatus` varchar(10) NOT NULL,
-  `TotalAmount` decimal(10,2) NOT NULL
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT 'fk_UserID',
+  `order_date` date NOT NULL DEFAULT current_timestamp(),
+  `order_status` varchar(10) NOT NULL,
+  `total_amount` decimal(65,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -88,11 +79,12 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_items` (
-  `OrderItemsID` int(11) NOT NULL,
-  `OrderID` int(10) NOT NULL COMMENT 'fk_OrderID',
-  `ProductID` int(12) NOT NULL COMMENT 'fk_ProductID',
-  `Quantity` int(11) NOT NULL,
-  `Price` decimal(10,2) NOT NULL
+  `id` int(11) NOT NULL,
+  `order_id` int(10) NOT NULL COMMENT 'fk_OrderID',
+  `product_id` int(12) NOT NULL COMMENT 'fk_ProductID',
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `price` decimal(10,2) NOT NULL,
+  `size` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -195,19 +187,19 @@ ALTER TABLE `brand`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`CartID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`OrderID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`OrderItemsID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `products`
@@ -248,19 +240,19 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `CartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `OrderItemsID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `products`
