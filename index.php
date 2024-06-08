@@ -217,7 +217,7 @@ include './inc/header.php';
               <div class="line">
                   <p id="line1">Take Your Style to New Heights</p>
                   <p id="line2">We can outsource any pair! Message us, and consider it already found, just for you!</p>
-                  <a href=""><button class="shopNowButton" title="Shop Now!">Place your Order Now!</button></a>
+                  <a href="collection.php"><button class="shopNowButton" title="Shop Now!">Place your Order Now!</button></a>
               </div>
           </div>
       </div>

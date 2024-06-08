@@ -130,6 +130,10 @@ if(isset($_POST['submit'])){
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        $("#images").change(function () {
+            readURL(this);
+        });
     </script>
 <?php
 include 'footer.php';
