@@ -6,7 +6,6 @@ if (isset($_SESSION['user_id']) === false){
     echo "<script>window.location.href='login.php';</script>";
 }
 
-
 ?>
 <body>
     <style>
@@ -20,48 +19,48 @@ if (isset($_SESSION['user_id']) === false){
     <div class="container-sm">             
             <div class="card shadow-lg mb-4" style="border-radius: 15px;">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Cart</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
                 </div>
                 <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                        <th scope="col"></th>
                         <th scope="col">Shoe</th>
                         <th scope="col">Image</th>
                         <th scope="col">Brand</th>
                         <th scope="col">Size</th>
-                        <th scope="col">Category</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                             $user_id = $_SESSION['user_id'];
 
-                            $qry = $conn->query("SELECT c.*, p.name, p.product_image, p.price, p.category, p.brand, b.name AS brand_name
-                                                 FROM cart c
-                                                 LEFT JOIN products p ON c.product_id = p.id
+                            $qry = $conn->query("SELECT o.*, p.name, p.product_image, p.category, p.brand, b.name AS brand_name, oi.size, oi.price
+                                                 FROM orders o
+                                                 LEFT JOIN order_items oi ON o.id = oi.order_id
+                                                 LEFT JOIN products p ON oi.product_id = p.id
                                                  LEFT JOIN brand b ON p.brand = b.id
-                                                 WHERE c.user_id = $user_id;");
+                                                 WHERE o.user_id = $user_id;");
 
                             while ($row = $qry->fetch_assoc()):
                                     $id = $row['id'];
                                     $name = $row['name'];
                                     $price = $row['price'];
                                     $brand = $row['brand_name'];
-                                    $category = $row['category'];
                                     $picture = $row['product_image'];
                                     $size = $row['size'];
+                                    $status = $row['order_status'];
                         ?>
                         <tr>
-                        <th scope="row"><input type="checkbox" name="myCheckbox[]" value="<?php echo $id; ?>" required></th>
                         <td><?php echo $name; ?></td>
                         <td><img src="assets/uploaded_image/<?php echo $picture ?>" height="50" alt="" class="img-fluid cartImg"></td>
                         <td><?php echo $brand; ?></td>
                         <td><?php echo $size; ?></td>
-                        <td><?php echo $category; ?></td>
                         <td><?php echo $price; ?></td>
+                        <td><?php echo $status; ?></td>
                         </tr>
                     <?php endwhile; ?>
                     </tbody>
@@ -79,60 +78,3 @@ if (isset($_SESSION['user_id']) === false){
             </div>
         </div>
     </body>
-<script>
-const checkboxes = document.querySelectorAll('input[name="myCheckbox[]"]');
-
-    function backBtn() {
-        window.location.href = "index.php";
-    }
-
-    function validateCheckboxes() {
-            let isChecked = false;
-
-            checkboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    isChecked = true;
-                }
-            });
-
-            if (isChecked) {
-                $("#submit").prop("disabled", false);
-                return true;
-            } else {
-                $("#submit").prop("disabled", true);
-                return false;
-            }
-        }
-
-        document.querySelectorAll('input[name="myCheckbox[]"]').forEach((checkbox) => {
-            checkbox.addEventListener('change', validateCheckboxes);
-        });
-
-  
-        validateCheckboxes();
-
-     
-        $("#submit").click(function() {
-            console.log("click event");
-            if (validateCheckboxes()) {
-                const selectedCheckboxes = [];
-                document.querySelectorAll('input[name="myCheckbox[]"]:checked').forEach((checkbox) => {
-                    selectedCheckboxes.push(checkbox.value);
-                });
-                console.log(selectedCheckboxes);
-                $.ajax({
-                    url: 'checkout.php',
-                    type: 'POST',
-                    data: { checkboxes: selectedCheckboxes },
-                    success: function(response) {
-                    window.location.href='printOrders.php';
-                  
-                    },
-                    error: function(xhr, status, error) {
-                    
-                        console.error('Error:', error);
-                    }
-                });
-            }
-        });
-</script>

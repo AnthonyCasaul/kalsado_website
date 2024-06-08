@@ -25,8 +25,12 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['addToCart'])) {
     if (isset($_SESSION['user_id']) === true){
-        echo "successs";
-    }else {
+      $user_id = $_SESSION['user_id'];
+      $size = mysqli_real_escape_string($conn, $_POST['size']);
+      $insert = mysqli_query($conn, "INSERT INTO `cart`(user_id, product_id, size, total_price) VALUES('$user_id', '$id', '$size', '$price')") or die('query failed');
+      echo "<script>window.location.href='cart.php';</script>";
+    }
+    else {
         echo "<script>window.location.href='login.php';</script>";
     }
 }
@@ -117,22 +121,34 @@ if (isset($_POST['addToCart'])) {
                     <p class="price">₱<?php echo $price ?></p>
                         <div class="sizes">
                             <p>Select Size</p>
+                            <form method="post" action="">
                                 <div class="size-buttons">
-                                    <button>9.5 US</button>
-                                    <button>10 US</button>
-                                    <button>10.5 US</button>
-                                    <button>11 US</button>
-                                    <button>11.5 US</button>
-                                    <button>12 US</button>
-                                    <button>12.5 US</button>
-                                    <button>13 US</button>
-                                    <button>13.5 US</button>
-                                    <button>14 US</button>
-                                    <button>14.5 US</button>
-                                    <button>15 US</button>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined1" value="9.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined1">9.5 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined2" value="10 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined2">10 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined3" value="10.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined3">10.5 US US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined4" value="11 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined4">11 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined5" value="11.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined5">11.5 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined6" value="12 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined6">12 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined7" value="12.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined7">12.5 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined8" value="13 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined8">13 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined9" value="13.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined9">13.5 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined10" value="14 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined10">14 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined11" value="14.5 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined11">14.5 US</label>
+                                    <input type="radio" class="btn-check" name="size" id="btn-check-outlined12" value="15 US" autocomplete="off">
+                                    <label class="btn btn-outline-secondary" for="btn-check-outlined12">15 US</label>
                                 </div>
                         </div>
-                    <form method="post" action="">
                      <button type="submit" name="addToCart" class="cart-button">I WANT THIS</button>
                     </form>
                 </div>

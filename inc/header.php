@@ -31,7 +31,7 @@ $loggedIn = isset($_SESSION['user_id']) === true;
 
                     <a href="index.php" class="nav_link" title="Home">Home</a>
                     <a href="collection.php" class="nav_link" title="Collection">Collection</a>
-                    <a href="" class="nav_link" title="About">About</a>
+                    <a href="orders.php" class="nav_link" title="About">Orders</a>
                     <a href="cart.php" class="nav_link" title="Cart"><img src="./assets/images/cart-icon.png" width="40"></a>
                     <?php if (!$loggedIn): ?>
                         <a href="login.php" class="nav_link" title="Login">Login</a>
