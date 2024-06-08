@@ -55,8 +55,10 @@ include './inc/header.php';
 }
 </style>
 <body onload="getCategory('all'); getAllCategories();">
+
 <div class="container-fluid ml-5">
     <div class="flex gap-4 buttonContainer" id="buttonContainer"></div>
+
     <div class="wrapper" id="productContainer">
  </div> 
 </div>
