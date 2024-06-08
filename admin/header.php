@@ -38,7 +38,7 @@ if (isset($_POST['logout'])) {
 
 <div id="wrapper">
 
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #f6c23e;">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #FAC4AD;">
 
         <div class="sidebar-brand d-flex align-items-center justify-content-center mt-4">
             <div class="sidebar-brand-icon">
